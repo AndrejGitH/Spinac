@@ -9,10 +9,10 @@ import paramiko
 import xml.etree.ElementTree as ET
 
 #Connection variables
-hostname = "127.0.0.1"
+hostname = input("Enter hostname/IP adress: ")
 port = 22
-user = "Siemens"
-password = "Python"
+user = input("Enter username: ")
+password = input("Enter password: ")
 
 
 try: 
@@ -27,8 +27,8 @@ try:
 
 #Parsing and updating the xml config file
     sftp = client.open_sftp()
-    linuxXML_path = "path/config.xml"
-    local_path = "C:/Desktop/config.xml" 
+    linuxXML_path = input("Enter Linux file path: ")
+    local_path = input("Enter local file path: ")
     
     sftp.get(linuxXML_path, local_path)
     print("XML downloaded!")
