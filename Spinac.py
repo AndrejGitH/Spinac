@@ -10,7 +10,9 @@ import paramiko
 # Module to allow us to work with xml files
 import xml.etree.ElementTree as ET
 
-def update_xml_file_linux(hostname, user, password, linuxXML_path, local_path, port=22):
+def update_xml_file_linux(hostname, user, password, linuxXML_path, local_path, element_tag, port=22):
+    """Connects to a Linux server via SSH, downloads an XML file, updates element, and uploads it back."""
+
     try:
         # Connecting to the server via SSH
         client = paramiko.SSHClient()
@@ -41,7 +43,7 @@ def update_xml_file_linux(hostname, user, password, linuxXML_path, local_path, p
 
         updated = False
 
-        for element in root.iter('light'):
+        for element in root.iter(element_tag):
             if element.text and element.text.lower() == "true":
                 element.text = "false"
                 updated = True
@@ -70,6 +72,7 @@ def main():
     password = input("Enter password: ")
     linuxXML_path = input("Enter Linux file path: ")
     local_path = input("Enter local file path: ")
+    element_tag = input("Enter XML element tag to update: ")
 
     #Def call
-    update_xml_file_linux(hostname, user, password, linuxXML_path, local_path)
+    update_xml_file_linux(hostname, user, password, linuxXML_path, local_path, element_tag)
