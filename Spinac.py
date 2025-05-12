@@ -54,7 +54,7 @@ def update_xml_file_linux(hostname, user, password, linuxXML_path, local_path, e
             sftp.put(local_path, linuxXML_path)
             print("XML uploaded to the Linux client!")
         else:
-            print("No light element with true value found!")
+            print(f"No '{element_tag}' element with true value found!")
     except FileNotFoundError:
         print("Local path is wrong! No XML found.")
     except ET.ParseError:
@@ -76,3 +76,6 @@ def main():
 
     #Def call
     update_xml_file_linux(hostname, user, password, linuxXML_path, local_path, element_tag)
+
+if __name__ == "__main__":
+    main()
